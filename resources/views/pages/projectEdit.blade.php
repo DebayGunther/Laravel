@@ -11,7 +11,7 @@
     {!! Form::model($project, ['method' => 'PATCH', 'route' => ['projects.update', $project->slug]]) !!}
     @include('pages/projectsPartials/_form', ['submit_text' => 'Appliquer modifications'])
     {!! Form::close() !!}
-
+    </div>
 
 
 @endsection

@@ -1,0 +1,105 @@
+<?php $__env->startSection('title'); ?>
+    <h1> </h1>
+<?php $__env->stopSection(); ?>
+
+<?php $__env->startSection('contenu'); ?>
+
+
+    <style>
+
+        #liste{
+            margin-top: 10px;
+            border: solid;
+            width: 350px;
+            text-align: center;
+            border-radius: 15px;
+            position:center;
+        }
+
+        #plusbo{
+
+            margin-left: 5%
+        }
+
+
+
+
+
+    </style>
+
+
+    <h2>Listes</h2>
+
+    <?php if( !$projects->count() ): ?>
+       Vous n'avez aucune Liste
+    <?php else: ?>
+        <ul>
+            <?php foreach( $projects as $project ): ?>
+
+                <div id="liste">
+
+
+                    <?php echo Form::open(array('class' => 'form-inline', 'method' => 'DELETE', 'route' => array('projects.destroy', $project->slug))); ?>
+
+
+
+                    <a href="<?php echo e(route('projects.show', $project->slug)); ?>"><?php echo e($project->name); ?><br>( cliquer pour afficher ) </a>
+                    <br><br>
+                    Créé le :<br>
+                    <?php echo e($project->created_at); ?>
+
+                    <br>
+                    <br>
+                    Description :
+                    <?php echo e($project->description); ?> <br>
+                    <br>
+                    <br>
+                    <?php
+                    $compteur = 0
+                    ?>
+                    <?php foreach( $project->tasks as $task ): ?>
+                        <?php if( $task->completed == 1): ?>
+                            <?php
+                            $compteur++
+                            ?>
+                        <?php endif; ?>
+                    <?php endforeach; ?>
+                    Tâches accomplies:
+                    <?php echo e($compteur); ?>/<?php echo e($project->tasks->count()); ?>
+
+
+                    <br>
+                    <br>
+
+
+
+                    <?php echo link_to_route('projects.edit', 'Modifier', array($project->slug), array('class' => 'btn btn-info')); ?>
+
+                    <?php echo Form::submit('Supprimer', array('class' => 'btn btn-danger')); ?>
+
+
+
+                    <?php echo Form::close(); ?>
+
+                    <br>
+
+                </div>
+            <?php endforeach; ?>
+        </ul>
+    <?php endif; ?>
+
+    <p id="plusbo">
+
+
+
+
+        <?php echo link_to_route('projects.create', 'Créer une liste',null,array('class'=>'btn btn-success') ); ?>
+
+
+
+
+    </p>
+
+
+<?php $__env->stopSection(); ?>
+<?php echo $__env->make('../master', array_except(get_defined_vars(), array('__data', '__path')))->render(); ?>

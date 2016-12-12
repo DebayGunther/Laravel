@@ -31,6 +31,7 @@ Route::get('/project',[
 Route::model('tasks', 'Task');
 Route::model('projects', 'Project');
 
+
 // Change l'url pour afficher le slug qu'une ID dégeulasse
 Route::bind('tasks', function($value, $route) {
     return App\Task::whereSlug($value)->first();
@@ -41,12 +42,11 @@ Route::bind('projects', function($value, $route) {
 
 
 // on rajoute les controlleurs a la liste des routes , afin d'apeller les fonctions dans les controlleur sans avoir
-// a faire autant de route qu'il ,n'y a de fonction dans le controlleur ( i guess )
+// a faire autant de route qu'il ,n'y a de fonction dans le controlleur
 Route::resource('projects', 'ProjectsController');
 Route::resource('projects.tasks', 'TasksController');
 
-
-
+// définit un groupe de route
 
 
 

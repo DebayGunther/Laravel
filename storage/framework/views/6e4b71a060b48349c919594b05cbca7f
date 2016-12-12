@@ -1,0 +1,17 @@
+<?php $__env->startSection('title'); ?>
+    <h1>Modifier la liste "<?php echo e($project->name); ?>"</h1>
+<?php $__env->stopSection(); ?>
+
+<?php $__env->startSection('contenu'); ?>
+
+
+    <?php echo Form::model($project, ['method' => 'PATCH', 'route' => ['projects.update', $project->slug]]); ?>
+
+    <?php echo $__env->make('pages/projectsPartials/_form', ['submit_text' => 'Appliquer modifications'], array_except(get_defined_vars(), array('__data', '__path')))->render(); ?>
+    <?php echo Form::close(); ?>
+
+
+
+
+<?php $__env->stopSection(); ?>
+<?php echo $__env->make('../master', array_except(get_defined_vars(), array('__data', '__path')))->render(); ?>
